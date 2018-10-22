@@ -1,49 +1,60 @@
 import axios from "axios";
 import md5 from 'md5';
 
-import {messages} from "../resources/js/utils";
-import {siteUrl} from "../common/config";
+export const doReg = (props) => {
 
-export const checkLogin = (props, once_exit=false) =>
-    axios.get(siteUrl + '/auth/check',
+    props.dispatch.setter('loginReducer', {isProgressReg: true});
+
+    return axios.post('/auth/reg',
         {
-            headers: {'sessionId': once_exit? '' : props.state.loginReducer.token}
-        }
-    )
+            login: props.state.loginReducer.login,
+            password: md5(props.state.loginReducer.password),
+            email: props.state.loginReducer.email
+        })
         .then(
-            (resp) => resp.data,
-            (err) => err.response.data
+            resp => {
+                alert('регистрация прошла успешно');
+                props.dispatch.setter('startMenuReducer', {select: 'auth'});
+                props.dispatch.setter('loginReducer', {password: '', email: ''});
+            },
+            err => {
+                alert('login  или пароль не уникальны');
+            }
+        )
+        .then(
+            (r) => {
+                props.dispatch.setter('loginReducer', {isProgressReg: false});
+                return r;
+            }
         )
 
-export const doLogin = (props) =>
-    axios.post(siteUrl + '/auth/login',
+}
+
+export const doLogin = (props) => {
+
+    props.dispatch.setter('loginReducer', {isProgressAuth: true});
+
+    return axios.post('/auth/auth',
         {
             login: props.state.loginReducer.login,
             password: md5(props.state.loginReducer.password)
         })
         .then(
             resp => {
-                props.dispatch.setter('loginReducer', { password: '',  isAuth: true, token: resp.data.token } );
-                props.dispatch.setter('menuReducer', {  menu: resp.data.menu, item: 'my_list' } );
+                alert('авторизация прошла успешно');
+                props.dispatch.setter('loginReducer', {isAuth: true, token: resp.data});
+                props.dispatch.setter('startMenuReducer', {select: 'tasks'});
             },
             err => {
-                props.dispatch.setter('loginReducer', { password: '',  isAuth: false, token: '' } );
-                props.dispatch.setter('menuReducer', {  menu: err.response.data.menu, item: '' } );
-                messages(err.response.data, true);
+                alert('ошибка в login или password');
+                props.dispatch.setter('loginReducer', {isAuth: false, token: ''});
+            }
+        )
+        .then(
+            (r) => {
+                props.dispatch.setter('loginReducer', {isProgressAuth: false, password: ''});
+                return r;
             }
         )
 
-export const doReg = (props) =>
-    axios.post(siteUrl + '/auth/reg',
-    {
-        login: props.state.loginReducer.login,
-        password: md5(props.state.loginReducer.password),
-        email: props.state.loginReducer.email
-    })
-    .then(
-        resp => {
-        },
-        err => {
-            messages(err.response.data, true);
-        }
-    )
+}

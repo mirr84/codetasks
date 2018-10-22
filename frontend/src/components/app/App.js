@@ -2,64 +2,30 @@ import React from 'react';
 
 import {connector} from "../../store/utils/connector";
 import lifecycle from 'react-pure-lifecycle';
-import {Modal, ModalBody, Container, Row, Col, Card, CardBody, CardTitle, CardText} from "reactstrap";
+import StartMenu from "../StartMenu/StartMenu";
+
+import Auth from "../Auth/Auth";
+import Reg from "../Reg/Reg";
+import News from "../News/News";
+import Rating from "../Rating/Rating";
+import Tasks from "../Tasks/Tasks";
 
 const methods = {
     componentDidMount(props) {
     }
 }
 
-const App = () => {
+const App = ({state, dispatch}) => {
     return (
         <div>
 
-            <Modal isOpen={true} size={'lg'} centered={true} fade={false}>
-                <ModalBody>
-                    <Container>
-                        <Row>
-                            <Col>
-                                <Card>
-                                    <CardBody>
-                                        <CardTitle>Авторизация</CardTitle>
-                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <CardBody>
-                                        <CardTitle>Регистрация</CardTitle>
-                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <br/>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col>
-                                <Card>
-                                    <CardBody>
-                                        <CardTitle>Новости</CardTitle>
-                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                            <Col>
-                                <Card>
-                                    <CardBody>
-                                        <CardTitle>Что то еще</CardTitle>
-                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                    </CardBody>
-                                </Card>
-                            </Col>
-                        </Row>
-                    </Container>
-                </ModalBody>
-            </Modal>
+            <StartMenu subComponent={
+                state.startMenuReducer.select === 'auth' ? <Auth /> :
+                    state.startMenuReducer.select === 'reg' ? <Reg /> :
+                        state.startMenuReducer.select === 'news' ? <News /> :
+                            state.startMenuReducer.select === 'rating' ? <Rating /> :
+                                state.startMenuReducer.select === 'tasks' ? <Tasks /> : ''
+            } />
 
         </div>
     );
