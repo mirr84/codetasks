@@ -58,3 +58,26 @@ export const doLogin = (props) => {
         )
 
 }
+
+export const checkToken = (props) => {
+
+    return axios.post('/auth/check',
+        {
+            token: props.state.loginReducer.token
+        })
+        .then(
+            resp => {
+            },
+            err => {
+                props.dispatch.setter('loginReducer', {login: '', password: '', isAuth: false, email: '', token: '', isProgressReg: false});
+                props.dispatch.setter('startMenuReducer', {select: ''});
+            }
+        )
+        .then(
+            (r) => {
+                props.dispatch.setter('loginReducer', {password: ''});
+                return r;
+            }
+        )
+
+}

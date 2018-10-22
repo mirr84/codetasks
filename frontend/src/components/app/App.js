@@ -9,9 +9,11 @@ import Reg from "../Reg/Reg";
 import News from "../News/News";
 import Rating from "../Rating/Rating";
 import Tasks from "../Tasks/Tasks";
+import {checkToken} from "../../services/serviceAuth";
 
 const methods = {
     componentDidMount(props) {
+        checkToken(props);
     }
 }
 

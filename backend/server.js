@@ -9,9 +9,18 @@ app.use(orm.express("mysql://y913929d_orm2:123456@y913929d.beget.tech/y913929d_o
     define: function (db, models, next) {
         models.users = db.define("users",
             {
+                id: String,
                 login: String,
                 password: String,
-                email: String
+                email: String,
+                token: String
+            }
+        );
+        models.tasks = db.define("tasks",
+            {
+                id: String,
+                test: String,
+                result: String
             }
         );
         next();
@@ -43,6 +52,7 @@ app.post("/auth/auth", (req, res) =>
             let token = genToken();
             req.models.users.find(req.body)
                 .each((user) => {
+                    console.log(user)
                     user.token = token;
                 })
                 .save((err) => {
@@ -52,4 +62,25 @@ app.post("/auth/auth", (req, res) =>
             res.sendStatus(401);
         }
     })
+)
+
+app.post("/auth/check", (req, res) =>
+    req.models.users.count(req.body, (err, count) => {
+        if (count === 1) {
+            res.sendStatus(200);
+        } else {
+            res.sendStatus(401);
+        }
+    })
+)
+
+app.post("/tasks/get", (req, res) => {
+
+        let listTask =
+            req.models.tasks
+                .find({})
+                .each()
+
+        res.send(listTask);
+    }
 )
