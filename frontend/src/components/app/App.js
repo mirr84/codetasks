@@ -2,7 +2,7 @@ import React from 'react';
 
 import {connector} from "../../store/utils/connector";
 import lifecycle from 'react-pure-lifecycle';
-import {Modal, ModalBody, Container, Row, Col, Card, CardBody} from "reactstrap";
+import {Modal, ModalBody, Container, Row, Col, Card, CardBody, CardTitle, CardText} from "reactstrap";
 
 const methods = {
     componentDidMount(props) {
@@ -20,20 +20,16 @@ const App = () => {
                             <Col>
                                 <Card>
                                     <CardBody>
-                                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam
-                                            beatae consequatur distinctio dolorum esse, est id iusto laborum maiores
-                                            obcaecati provident quam quia ratione rem repellendus, soluta totam unde.
-                                        </div>
+                                        <CardTitle>Авторизация</CardTitle>
+                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
                                     </CardBody>
                                 </Card>
                             </Col>
                             <Col>
                                 <Card>
                                     <CardBody>
-                                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam
-                                            beatae consequatur distinctio dolorum esse, est id iusto laborum maiores
-                                            obcaecati provident quam quia ratione rem repellendus, soluta totam unde.
-                                        </div>
+                                        <CardTitle>Регистрация</CardTitle>
+                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
                                     </CardBody>
                                 </Card>
                             </Col>
@@ -47,20 +43,16 @@ const App = () => {
                             <Col>
                                 <Card>
                                     <CardBody>
-                                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam
-                                            beatae consequatur distinctio dolorum esse, est id iusto laborum maiores
-                                            obcaecati provident quam quia ratione rem repellendus, soluta totam unde.
-                                        </div>
+                                        <CardTitle>Новости</CardTitle>
+                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
                                     </CardBody>
                                 </Card>
                             </Col>
                             <Col>
                                 <Card>
                                     <CardBody>
-                                        <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquam
-                                            beatae consequatur distinctio dolorum esse, est id iusto laborum maiores
-                                            obcaecati provident quam quia ratione rem repellendus, soluta totam unde.
-                                        </div>
+                                        <CardTitle>Что то еще</CardTitle>
+                                        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
                                     </CardBody>
                                 </Card>
                             </Col>
