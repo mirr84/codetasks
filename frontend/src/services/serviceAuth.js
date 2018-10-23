@@ -61,6 +61,10 @@ export const doLogin = (props) => {
 
 export const checkToken = (props) => {
 
+    if (!props.state.loginReducer.token) {
+        return Promise.resolve({});
+    }
+
     return axios.post('/auth/check',
         {
             token: props.state.loginReducer.token

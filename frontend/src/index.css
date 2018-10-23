@@ -34,3 +34,8 @@
 .block-main-menu::-webkit-resizer {
     transition: 0.5s;
 }
+
+.badge-right {
+    float: right;
+    cursor: pointer;
+}

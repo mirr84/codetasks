@@ -25,3 +25,29 @@ export const getTasks = (props) => {
         )
 
 }
+
+export const setTaskResult = (props, task) => {
+
+    props.dispatch.setter('tasksReducer', {isProgressGet: true});
+
+    return axios.post('/tasks/set',
+        {
+            token: props.state.loginReducer.token,
+            task
+        })
+        .then(
+            resp => {
+
+            },
+            err => {
+                alert('ошибка авторизации');
+            }
+        )
+        .then(
+            (r) => {
+                getTasks(props);
+                return r;
+            }
+        )
+
+}

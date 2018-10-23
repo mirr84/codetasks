@@ -3,7 +3,8 @@ import {getLocalStorage} from "../utils/getLocalStorage";
 
 const initState = {
     isProgressGet: false,
-    list: []
+    list: [],
+    selectTask: ''
 }
 
 export const tasksReducer = (state = getLocalStorage('tasksReducer', initState), action) => {
